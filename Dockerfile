@@ -4,21 +4,17 @@ FROM resin/rpi-raspbian:jessie
 
 MAINTAINER "Michael Droogleever" <droogmic@yahoo.com>
 
-#RUN apt-get update -y && \
-#    apt-get install -y git psmisc && \
-#    git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git && \
-#    chmod u+x RPi_Cam_Web_Interface/*.sh
-
 RUN apt-get update -y && \
     apt-get install -y git psmisc
 
 # from install.sh:322
-# to add: dialog from install.sh:42
 RUN apt-get install -y dialog nginx php5-fpm php5-cli php5-common php-apc apache2-utils gpac motion zip libav-tools gstreamer1.0-tools
 
 RUN git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git && \
+    cd RPi_Cam_Web_Interface; git checkout 667dc11c0f; cd .. && \ 
     chmod u+x RPi_Cam_Web_Interface/*.sh
 
+# workarounds
 RUN sed -i '/sudoers/c\' RPi_Cam_Web_Interface/install.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/install.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/start.sh && \
@@ -28,9 +24,6 @@ RUN sed -i '/sudoers/c\' RPi_Cam_Web_Interface/install.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/RPi_Cam_Web_Interface_Installer.sh && \
     sed -i 's/sudo shutdown -r now//g' RPi_Cam_Web_Interface/www/macros/error_hard.sh && \
     sed -i 's/status_file \/dev/status_file \/run/g' RPi_Cam_Web_Interface/etc/raspimjpeg/raspimjpeg.1
-
-#RUN mkdir -p /run/shm/mjpeg && \
-#    mkdir -p /opt/vc/bin
 
 RUN mkdir -p /run/shm/mjpeg
 
