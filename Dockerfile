@@ -40,6 +40,7 @@ RUN chmod u+x /RPi_Cam_Web_Interface/docker-entry.sh
 COPY config.txt /RPi_Cam_Web_Interface
 
 COPY userconfig/uconfig /RPi_Cam_Web_Interface
+COPY userconfig/schedule.json /RPi_Cam_Web_Interface
 
 # ENTRYPOINT ./install.sh
 # ENTRYPOINT /bin/bash
