@@ -21,3 +21,16 @@ This repo provides a Dockerfile which will containerise the RPi-Cam-Web-Interfac
 + docker-debug.sh - `# . docker-debug.sh` Command to run the command in the foreground for debugging
 + docker-entry.sh - Entrypoint script for the Dockerfile which is copied to the container
 + userconfig/ - Contains all the user configurable files, provided are examples from my system
+
+## Installation
+
+### Docker Hub
+https://hub.docker.com/r/droogmic/rpi-cam-web/
+
+### Git clone
+```
+git clone https://github.com/droogmic/rpi-cam-web-docker.git
+cd rpi-cam-web-docker
+. docker-build.sh
+. docker-run.sh
+```
