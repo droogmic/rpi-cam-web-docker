@@ -13,7 +13,7 @@ RUN apt-get install -y dialog nginx php5-fpm php5-cli php5-common php-apc apache
 # download installation files
 RUN git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git && \
     # comment the following line to download the untested most recent version
-    cd RPi_Cam_Web_Interface; git checkout 667dc11c0f; cd .. && \ 
+    cd RPi_Cam_Web_Interface; git checkout 2bc8542; cd .. && \ 
     chmod u+x RPi_Cam_Web_Interface/*.sh
 
 # workarounds
@@ -24,8 +24,7 @@ RUN sed -i '/sudoers/c\' RPi_Cam_Web_Interface/install.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/remove.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/update.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/RPi_Cam_Web_Interface_Installer.sh && \
-    sed -i 's/sudo shutdown -r now//g' RPi_Cam_Web_Interface/www/macros/error_hard.sh && \
-    sed -i 's/status_file \/dev/status_file \/run/g' RPi_Cam_Web_Interface/etc/raspimjpeg/raspimjpeg.1
+    sed -i 's/sudo shutdown -r now//g' RPi_Cam_Web_Interface/www/macros/error_hard.sh
 
 # another workaround
 RUN mkdir -p /run/shm/mjpeg
