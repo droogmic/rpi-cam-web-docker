@@ -4,7 +4,6 @@ rpi-cam-web-docker
 This repo provides a Dockerfile which will containerise the RPi-Cam-Web-Interface, as found [here on GitHub](https://github.com/silvanmelchior/RPi_Cam_Web_Interface) or [as described here on their wiki](http://elinux.org/RPi-Cam-Web-Interface).
 
 ## Notes
-
 + The license is MIT. 
 + It may not function as advertised. 
 + Submit pull requests to improve this project.
@@ -12,8 +11,10 @@ This repo provides a Dockerfile which will containerise the RPi-Cam-Web-Interfac
 + Contains MOSTLY workarounds for problems found during the normal install problems
 + Liable to break as the source github repo changes.
 
-## File description
+## Bugs
++ Changing config does not work.
 
+## File description
 + Dockerfile - Main dockerfile for building the image
 + config.txt - Install configuration for quiet install
 + docker-build.sh - `# . docker-build.sh` Command to build the image
