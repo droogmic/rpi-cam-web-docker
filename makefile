@@ -9,8 +9,10 @@ dev-build latest-build:
 dev-build-install:
 	+$(MAKE) -C install dev-build
 	+$(MAKE) -C customise dev-build
+dev-build-customise:
+	+$(MAKE) -C customise dev-build
 dev-debug:
-	docker run -it --rm -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm rpi-cam-web:develop -B
+	docker run -it --rm -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm  rpi-cam-web:develop debug
 dev-run:
 	docker run -d --name=rpi-cam  -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm rpi-cam-web:develop
 push:

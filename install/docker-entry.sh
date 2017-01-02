@@ -4,10 +4,14 @@ RPi_Cam_Web_Interface/start.sh
 
 #  e.g. php5-fpm -F
 if [ $# -eq 0 ]
-  then
-      echo "No param"
-      php5-fpm -B
-  else
-      echo "Param $1"
-      php5-fpm $1
+then
+    echo "Running php-fpm in foreground"
+    php5-fpm -F
+elif [ $1 == "debug" ]
+then
+    echo "debug"
+    php5-fpm -D
+    /bin/bash
+else
+    echo "Invalid parameter $1"
 fi

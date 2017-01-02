@@ -18,5 +18,4 @@ COPY docker-entry.sh ./
 RUN chmod u+x docker-entry.sh && \
     ln docker-entry.sh /usr/local/bin/rpi-cam-web
 
-ENTRYPOINT rpi-cam-web
-CMD ["-F"]
+ENTRYPOINT ["rpi-cam-web"]
