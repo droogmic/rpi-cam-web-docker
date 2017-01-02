@@ -1,2 +1,5 @@
 *.bkp
 .Trash-1000/
+customise/userconfig/
+userconfigs/*
+!userconfigs/default

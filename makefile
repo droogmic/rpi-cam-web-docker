@@ -15,6 +15,10 @@ dev-debug:
 	docker run -it --rm -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm  rpi-cam-web:develop debug
 dev-run:
 	docker run -d --name=rpi-cam  -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm rpi-cam-web:develop
+ld-userconfig:
+	@read -p "Enter userconfig name:" userconfig_name;
+	cp ./userconfigs/$$userconfig_name/ ./customise/
+	mv ./customise/$$userconfig_name ./customise/userconfig
 push:
 	docker push droogmic/rpi-cam-web
 release:
