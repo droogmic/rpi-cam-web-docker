@@ -4,9 +4,6 @@ FROM resin/rpi-raspbian:jessie
 
 MAINTAINER "Michael Droogleever" <droogmic@yahoo.com>
 
-RUN mkdir -p /rpi-cam-web
-WORKDIR /rpi-cam-web
-
 RUN apt-get update -y && \
     apt-get install -y git
     # psmisc
@@ -19,13 +16,13 @@ RUN apt-get update -y && \
 # download installation files
 RUN git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git && \
     # comment the following line to download the untested most recent version
-    cd RPi_Cam_Web_Interface; git checkout -q c4d19ec; cd .. && \
+    cd RPi_Cam_Web_Interface; git checkout 2bc8542; cd .. && \
     chmod u+x RPi_Cam_Web_Interface/*.sh
 
 # workarounds
 RUN mkdir -p /run/shm/mjpeg && \
     sed -i '/sudoers/c\\# sudoers removed' RPi_Cam_Web_Interface/install.sh && \
-    sed -i '/\/opt\/vc\/bin\//c\\echo raspimjpeg related install.sh line removed' RPi_Cam_Web_Interface/install.sh && \
+    sed -i '/\/opt\/vc\/bin\//c\\# raspimjpeg removed' RPi_Cam_Web_Interface/install.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/install.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/start.sh && \
     sed -i 's/sudo //g' RPi_Cam_Web_Interface/stop.sh && \
@@ -36,7 +33,7 @@ RUN mkdir -p /run/shm/mjpeg && \
     rm RPi_Cam_Web_Interface/www/macros/error_hard.sh
 
 # entry file
-COPY docker-setup.sh ./
-RUN chmod u+x docker-setup.sh
+COPY docker-setup.sh RPi_Cam_Web_Interface
+RUN chmod u+x RPi_Cam_Web_Interface/docker-setup.sh
 
-CMD ./docker-setup.sh
+CMD RPi_Cam_Web_Interface/docker-setup.sh

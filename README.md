@@ -11,10 +11,13 @@ This repo provides a Dockerfile which will containerise the RPi-Cam-Web-Interfac
 + Contains MOSTLY workarounds for problems found during the normal install problems
 + Liable to break as the source github repo changes.
 
-## Bugs
-+ Changing config does not work.
-
 ## File description
++ makefile - main makefile for controlling builds and containers
+  + make debug(-dev) - run (dev) image in foreground
+  + make run(-dev) - run (dev) image in detached mode
+  + make build(-dev) - build all (dev) images from Dockerfile.dev
+
+### Archive
 + Dockerfile - Main dockerfile for building the image
 + config.txt - Install configuration for quiet install
 + docker-build.sh - `# . docker-build.sh` Command to build the image
@@ -32,6 +35,6 @@ https://hub.docker.com/r/droogmic/rpi-cam-web/
 ```
 git clone https://github.com/droogmic/rpi-cam-web-docker.git
 cd rpi-cam-web-docker
-. docker-build.sh
-. docker-run.sh
+make build
+make run
 ```

@@ -1,4 +1,4 @@
-FROM droogmic/rpi-cam-web:develop-preinstall
+FROM droogmic/rpi-cam-web:latest-preinstall
 
 MAINTAINER "Michael Droogleever" <droogmic@yahoo.com>
 
@@ -8,15 +8,15 @@ MAINTAINER "Michael Droogleever" <droogmic@yahoo.com>
 #     apt-get install -y psmisc dialog nginx php5-fpm php5-cli php5-common php-apc apache2-utils gpac motion zip libav-tools gstreamer1.0-tools
 
 # application config, doesnt need modifying
-COPY config.txt ./RPi_Cam_Web_Interface/
+COPY config.txt /RPi_Cam_Web_Interface
 
 # run install in quiet mode
 RUN RPi_Cam_Web_Interface/install.sh q
 
 # entry file
-COPY docker-entry.sh ./
+COPY docker-entry.sh .
 RUN chmod u+x docker-entry.sh && \
-    ln docker-entry.sh /usr/local/bin/rpi-cam-web
+    ln -s docker-entry.sh /usr/local/bin/rpi-cam-web
 
 ENTRYPOINT rpi-cam-web
 CMD ["-F"]

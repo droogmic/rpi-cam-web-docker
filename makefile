@@ -1,14 +1,17 @@
 ts := $(shell /bin/date "+%Y%m%d")
 
-all:
-	@echo "options: makefile-dev, build(-dev), run, push, release"
-makefile-dev build-dev build:
+default:
+	@echo pass
+dev-build latest-build:
 	+$(MAKE) -C setup $@
 	+$(MAKE) -C install $@
 	+$(MAKE) -C customise $@
-debug-dev:
-	docker run -it --rm -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm rpi-cam-web:develop
-run-dev:
+dev-build-install:
+	+$(MAKE) -C install dev-build
+	+$(MAKE) -C customise dev-build
+dev-debug:
+	docker run -it --rm -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm rpi-cam-web:develop -B
+dev-run:
 	docker run -d --name=rpi-cam  -p=80:80/tcp --volume=/opt/vc:/opt/vc --device=/dev/vchiq --device=/dev/vcsm rpi-cam-web:develop
 push:
 	docker push droogmic/rpi-cam-web
@@ -20,3 +23,9 @@ release:
 	+$(MAKE) -C setup $@
 	+$(MAKE) -C install $@
 	+$(MAKE) -C customise $@
+rmi:
+	docker rmi $(shell docker images --filter dangling=true -q) || true
+rm:
+	docker rm -v $(shell docker ps --filter status=exited -q) || true
+volumes-rm:
+	docker volume rm $(shell docker volume ls -qf dangling=true) || true
