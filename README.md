@@ -7,8 +7,7 @@ This repo provides a Dockerfile which will containerise the RPi-Cam-Web-Interfac
 + It may not function as advertised.
 + Submit pull requests to improve this project.
 + Currently only works with nginx server.
-+ Contains workarounds for problems found during the normal install problems
-+ Liable to break as the source github repo changes.
++ Contains workarounds for problems found running the normal install script in a container
 
 ## File description
 + makefile - main makefile for controlling builds and containers
@@ -31,3 +30,13 @@ default
 make dev-build
 make dev-run
 ```
+
+## Develpment
+
+Development is done using the makefile.
++ Modify files as needed
++ `make ld-userconfig` (optional) - loads config based on name, default: default
++ `make dev-build` - Builds new images, if there are errors, correct and run again
++ `make dev-debug` - Test to see if it works
++ `make release` - Re-tag images in preparation of being pushed
++ `make push` - Docker push
